@@ -5,11 +5,11 @@
 - [x] Fork do repositório: https://github.com/matteuzdutra/OpenMU
 - [x] Clone em C:\MUDEV\09-Source\OpenMU
 - [x] Criação da estrutura de documentação
-- [ ] Verificar Docker Desktop instalado e em execução
-- [ ] Primeiro `docker compose up` com a imagem oficial
-- [ ] Aceder ao AdminPanel em http://localhost
-- [ ] Inicializar a base de dados (Season 6)
-- [ ] Conectar o cliente MU ao servidor local
+- [x] Verificar Docker Desktop instalado e em execução
+- [x] Primeiro `docker compose up` com a imagem oficial
+- [x] Aceder ao AdminPanel em http://localhost
+- [x] Inicializar a base de dados (Season 6)
+- [x] Conectar o cliente MU ao servidor local
 
 ## Fase 2 — Exploração da arquitectura
 - [ ] Ler e entender o projecto Startup
@@ -21,7 +21,7 @@
 - [ ] Mapear o fluxo completo de uma conexão de cliente
 
 ## Fase 3 — Primeira modificação
-- [ ] Criar uma conta de teste personalizada
+- [x] Criar uma conta de teste personalizada
 - [ ] Modificar uma mensagem do sistema
 - [ ] Entender como adicionar um comando GM
 

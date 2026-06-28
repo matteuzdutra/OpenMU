@@ -75,5 +75,69 @@ Esta separação permite:
 
 ---
 
+---
+
+## Sessão 2 — Cliente e primeira ligação
+
+### ServerList.bmd — O que contém realmente
+O ficheiro `Data\Local\ServerList.bmd` está encriptado com XOR (chave `FC CF AB` repetida).
+Após decifrar, contém apenas **nomes de grupos de servidores** e metadata de display (posição, sequência, flags PvP).
+**Não contém IPs nem portas.** O IP real do connect server vem do código (`config.ini` ou defaults hard-coded).
+
+### Fluxo de ligação do cliente MuMain
+```
+Main.exe arranca
+    → lê config.ini → [CONNECTION SETTINGS] ServerIP / ServerPort
+    → se não existe, usa default: 127.127.127.127:44406
+    → conecta ao Connect Server (porta 44406)
+    → Connect Server responde com lista de Game Servers + IPs
+    → cliente conecta ao Game Server escolhido
+```
+
+### IpResolverType — Configuração crítica
+O OpenMU tem uma definição de como reporta o seu IP aos clientes:
+- `IpResolverType_Public_Name` → usa o IP público da máquina (ex: 89.115.187.246) — causa "disconnected" em jogo local
+- `IpResolverType_Loopback_Name` → usa `127.0.0.1` — correcto para jogar na mesma máquina
+- `IpResolverType_Custom_Name` → IP personalizado definido em "Custom IP / Hostname"
+
+**Para servidor local, usar sempre `Loopback_Name`.**
+Configuração em: AdminPanel → Configuration → System.
+
+### GameGuard — Anti-cheat
+O MU Online original usa GameGuard (npgmup.dll, GameGuard.des, GameGuard.csr) para proteger contra cheats.
+Para servidores privados/desenvolvimento, deve ser desactivado renomeando os ficheiros para `.bak`.
+O MuMain open-source não precisa de GameGuard — foi reescrito sem essa dependência.
+
+### Filter.bmd — Versões incompatíveis
+O ficheiro `Data\Local\Filter.bmd` existe em duas versões:
+- **MuMain zip**: 20005 bytes → causa erro "file corrupted" no cliente patched
+- **Season6 zip**: 20004 bytes → versão correcta
+
+Sempre usar o Filter.bmd do zip Season6.
+
+### Portas do OpenMU
+| Serviço | Porta | Protocolo |
+|---------|-------|-----------|
+| Connect Server (Season6) | 44405 | TCP |
+| Connect Server (MuMain) | 44406 | TCP |
+| Game Server 0 | 55901, 55902 | TCP |
+| Game Server 1 | 55903, 55904 | TCP |
+| Game Server 2 | 55905, 55906 | TCP |
+| Chat Server | 55980 | TCP |
+| AdminPanel | 80 | HTTP |
+
+### Base de dados PostgreSQL
+O OpenMU usa PostgreSQL com schema `data`. Exemplos de queries úteis:
+```sql
+-- Ver personagens de uma conta
+SELECT a."LoginName", c."Name", c."Experience"
+FROM data."Account" a
+JOIN data."Character" c ON c."AccountId" = a."Id"
+WHERE a."LoginName" = 'matteuz';
+```
+As tabelas e colunas usam PascalCase com aspas duplas em PostgreSQL.
+
 ## Próxima sessão
-- Docker Desktop: verificar instalação e primeiro arranque do servidor
+- Explorar a arquitectura do OpenMU (projecto Startup, Network, GameLogic)
+- Aprender a adicionar itens via AdminPanel
+- Explorar comandos GM
