@@ -11,7 +11,7 @@ services:
       - openmu-startup
 
   openmu-startup:
-    image: matteuzdutra/openmu:local
+    image: munique/openmu
     container_name: openmu-startup
     ports:
       - "8080"

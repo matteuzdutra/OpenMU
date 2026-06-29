@@ -49,14 +49,6 @@ public class MoveChatCommandPlugIn : ChatCommandPlugInBase<MoveChatCommandArgs>
                 await sender.ShowLocalizedBlueMessageAsync(nameof(PlayerMessage.MovedPlayerResult), this.Key, targetPlayer.Name, exitGate!.Map!.Name.GetTranslation(sender.Culture), targetPlayer.Position.X, targetPlayer.Position.Y).ConfigureAwait(false);
             }
         }
-        else if (senderIsGameMaster)
-        {
-            var exitGate = await this.GetExitGateAsync(sender, arguments.Target!, arguments.Coordinates).ConfigureAwait(false);
-            if (exitGate is not null)
-            {
-                await sender.WarpToAsync(exitGate).ConfigureAwait(false);
-            }
-        }
         else
         {
             var warpInfo = this.GetWarpInfo(sender, arguments.Target!);
