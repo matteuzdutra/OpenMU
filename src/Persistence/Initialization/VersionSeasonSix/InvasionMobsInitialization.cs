@@ -58,6 +58,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
 
             this.AddBoxOfKundunToMonster(1, monster);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -91,6 +92,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
 
             this.AddBoxOfKundunToMonster(3, monster);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -120,6 +122,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             };
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
             monster.SetGuid(monster.Number);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -153,6 +156,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
 
             this.AddBoxOfKundunToMonster(4, monster);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -184,6 +188,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             };
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
             monster.SetGuid(monster.Number);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -217,6 +222,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
 
             this.AddBoxOfKundunToMonster(5, monster);
+            this.AddGemstoneDropToMonster(monster);
         }
     }
 

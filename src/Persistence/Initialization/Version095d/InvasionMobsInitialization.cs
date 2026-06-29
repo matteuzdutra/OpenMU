@@ -75,6 +75,8 @@ internal class InvasionMobsInitialization : InitializerBase
             itemDrop.PossibleItems.Add(this.GameConfiguration.Items.First(item => item.Group == 14 && item.Number == 11));
             monster.DropItemGroups.Add(itemDrop);
             this.GameConfiguration.DropItemGroups.Add(itemDrop);
+
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -106,6 +108,7 @@ internal class InvasionMobsInitialization : InitializerBase
             };
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
             monster.SetGuid(monster.Number);
+            this.AddGemstoneDropToMonster(monster);
         }
 
         {
@@ -139,7 +142,22 @@ internal class InvasionMobsInitialization : InitializerBase
             monster.AddAttributes(attributes, this.Context, this.GameConfiguration);
 
             this.AddBoxOfKundunToMonster(2, monster);
+            this.AddGemstoneDropToMonster(monster);
         }
+    }
+
+    /// <summary>
+    /// Adds a Gemstone drop (100% chance) to a golden monster.
+    /// </summary>
+    protected void AddGemstoneDropToMonster(MonsterDefinition monster)
+    {
+        var itemDrop = this.Context.CreateNew<DropItemGroup>();
+        itemDrop.Chance = 1;
+        itemDrop.Description = "Gemstone from Golden Monster";
+        itemDrop.Monster = monster;
+        itemDrop.PossibleItems.Add(this.GameConfiguration.Items.First(item => item.Group == 14 && item.Number == 41));
+        monster.DropItemGroups.Add(itemDrop);
+        this.GameConfiguration.DropItemGroups.Add(itemDrop);
     }
 
     /// <summary>
